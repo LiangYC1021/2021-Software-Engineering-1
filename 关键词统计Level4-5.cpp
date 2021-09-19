@@ -14,9 +14,9 @@ string Key[105]={"","auto","break","case","char","const","continue","default","d
 "struct","switch","typedef","union","unsigned","void","volatile","while"};
 //there are 32 keywords
 
-int tot_num,swi_num,case_num;
+int Tot_num,Swi_num,Case_num;
 int elseif_num,else_num;
-vector<int>Swich;//the case num of each "Swich" Keyword
+vector<int>Swt;//the case num of each "Switch" Keyword
 vector<string>ie;//the "queue" of "if_else" or "if_elseif_else" Keywords
 stack<string>stk;//the "stack" of "if_else" or "if_elseif_else" Keywords
 
@@ -44,7 +44,7 @@ inline string Pre(string s)
 	return res;
 } 
 
-inline bool match(string s)
+inline bool Match(string s)
 {
 	string res="NULL";
 	rep(i,1,32){
@@ -53,14 +53,14 @@ inline bool match(string s)
 			break;
 		}
 	}
-	if(res=="switch"&&case_num){
-		Swich.push_back(case_num);
-		case_num=0;
+	if(res=="switch"&&Case_num){
+		Swt.push_back(Case_num);
+		Case_num=0;
 	}
-	if(res=="case")case_num++;
+	if(res=="case")Case_num++;
 	if(res=="if" || res=="else")ie.push_back(res);
 	if(res!="NULL"){
-		tot_num++;
+		Tot_num++;
 		return true;
 	}
 	return false;
@@ -75,7 +75,7 @@ inline void check(string s)
 		if(s[i]=='{')ie.push_back("{");
 		if(s[i]=='}')ie.push_back("}");
 		for(int j=8;j>=2;j--){
-			if(match(s.substr(i,j))){
+			if(Match(s.substr(i,j))){
 				i+=j-1;
 				break;
 			}
@@ -83,7 +83,7 @@ inline void check(string s)
 	}
 }
 
-inline void special_check(string s)
+inline void Special_Check(string s)
 {
 	int len=s.size();
 	s+="$$$$";
@@ -143,14 +143,14 @@ inline void Out(int level)
 		cout<<"This is an incorrect level, please enter a level between 1 and 4."<<endl;
 		return;
 	}	
-	if(level>=1)cout<<"total num: "<<tot_num<<endl;	
+	if(level>=1)cout<<"total num: "<<Tot_num<<endl;	
 	if(level>=2){		
-		if(Swich.size()>0){
-			cout<<"switch num: "<<Swich.size()<<endl;
+		if(Swt.size()>0){
+			cout<<"switch num: "<<Swt.size()<<endl;
 			cout<<"case num: ";	
-			for(int i=0;i<Swich.size();i++){
+			for(int i=0;i<Swt.size();i++){
 				if(i)cout<<" ";
-				cout<<Swich[i];
+				cout<<Swt[i];
 			}		
 		}
 		else cout<<"There is no Switch structure";
@@ -179,11 +179,11 @@ int main()
 	while(getline(cin,s)){
 		s=Pre(s);
 		check(s);
-		special_check(s);
+		Special_Check(s);
 	}
-	if(case_num)Swich.push_back(case_num);
+	if(Case_num)Swt.push_back(Case_num);
 	Count_ie_num();//count the number of "if else" or "if else_if else"
-	for(int i=0;i<Swich.size();i++);
+	for(int i=0;i<Swt.size();i++);
 		
 	Out(level);
 	return 0;
