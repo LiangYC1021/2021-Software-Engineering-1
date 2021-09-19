@@ -31,8 +31,7 @@ inline string Pre(string s)
 					s.erase(i,j-i+1);
 					break;
 				}
-			}
-			break;	
+			}	
 		}
 	}	
 	for(int i=0;i<s.size();i++){
@@ -89,7 +88,7 @@ inline void Special_Check(string s)
 	s+="$$$$";
 	int temp_if=0,temp_else=0;
 	for(int i=0;i<len;i++){
-		if(s.substr(i,2)=="if")temp_if++;
+		if(s.substr(i,2)=="if" && temp_else)temp_if++;
 		if(s.substr(i,4)=="else")temp_else++;
 	}
 	if(temp_else && temp_if){
