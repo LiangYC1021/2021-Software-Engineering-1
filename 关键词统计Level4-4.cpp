@@ -117,16 +117,7 @@ inline void Count_ie_num()
 	for(int i=0;i<ie.size();i++){
 //		cout<<ie[i]<<'\n';
 		if(ie[i]=="}"){
-			if(stk.top()!="else"){//失配，该情况不计数 
-				while(!stk.empty()){
-					if(stk.top()=="{"){
-						stk.pop();
-						break;
-					}
-					stk.pop();
-				} 
-			}
-			else while(!stk.empty()){
+			while(!stk.empty()){
 				string tp=stk.top();
 				stk.pop();
 				if(tp=="{")break;
@@ -149,7 +140,7 @@ inline void Count_ie_num()
 
 int main()
 {
-	freopen("test.txt","r",stdin);
+	freopen("input.txt","r",stdin);
 	ios::sync_with_stdio(false);
 	cin.tie(0);cout.tie(0);
 	
